@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "719509586850",
+    "firebase_url": "https://meowwooflover-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "meowwooflover",
+    "storage_bucket": "meowwooflover.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719509586850:android:9431b713e90fe5534968fb",
+        "android_client_info": {
+          "package_name": "com.example.MeowWoofSocial"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPFI-HIaCrMrMbj34j15yJ7UIXdgOE7_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
