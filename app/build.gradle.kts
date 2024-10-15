@@ -50,6 +50,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.6")
+    implementation ("com.google.firebase:firebase-auth:21.0.3")
+    implementation ("com.google.android.gms:play-services-auth:21.2.0")
+
 
     //ViewModel
     implementation("androidx.activity:activity-ktx:1.9.2")
