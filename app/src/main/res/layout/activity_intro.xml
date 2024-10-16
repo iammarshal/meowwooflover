@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="Sign in Now!"
                 android:layout_marginTop="32dp"
-                android:background="@drawable/green_bg"
+                android:background="@drawable/orange_bg"
                 android:layout_margin="24dp"
                 style="@android:style/Widget.Button"
                 android:textColor="@color/white"

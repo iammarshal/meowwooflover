@@ -85,7 +85,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     style="@android:style/Widget.Button"
-                    android:background="@drawable/green_bg"
+                    android:background="@drawable/orange_bg"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:id="@+id/applyCopoun"
@@ -205,7 +205,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/checkOutBtn"
-                android:background="@drawable/green_bg"
+                android:background="@drawable/orange_bg"
                 style="@android:style/Widget.Button"
                 android:textColor="@color/white"
                 android:layout_width="match_parent"

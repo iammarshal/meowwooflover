@@ -43,7 +43,7 @@ public class BestSellerAdapter extends RecyclerView.Adapter<BestSellerAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ItemsModel item = items.get(position);
         holder.binding.titleTxt.setText(item.getTitle());
-        holder.binding.priceTxt.setText(String.format("$%.2f", item.getPrice()));
+        holder.binding.priceTxt.setText(String.format("₫%.0f", item.getPrice()));
         holder.binding.ratingTxt.setText(String.format("%.1f", item.getRating()));
 
         RequestOptions requestOptions = new RequestOptions().transform(new CenterCrop());

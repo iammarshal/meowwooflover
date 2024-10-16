@@ -61,7 +61,7 @@ public class DetailActivity extends BaseActivity {
 
         binding.titleTxt.setText(item.getTitle());
         binding.descriptionTxt.setText(item.getDescription());
-        binding.priceTxt.setText("$" + item.getPrice());
+        binding.priceTxt.setText("₫" + item.getPrice());
         binding.ratingTxt.setText(item.getRating() + " ");
         binding.SellerNameTxt.setText(item.getSellerName());
 
