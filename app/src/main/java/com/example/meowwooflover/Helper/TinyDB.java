@@ -89,7 +89,7 @@ public class TinyDB {
      * @param theBitmap    the image you want to save as a Bitmap
      * @return returns the full path(file system address) of the saved image
      */
-    public String putImage(String theFolder, String theImageName, Bitmap theBitmap) {
+    public String putImage(String theFolder, String theImageName, Bitmap theBitmap, CompressFormat format) {
         if (theFolder == null || theImageName == null || theBitmap == null)
             return null;
 
@@ -98,7 +98,7 @@ public class TinyDB {
 
         if (!mFullPath.equals("")) {
             lastImagePath = mFullPath;
-            saveBitmap(mFullPath, theBitmap);
+            saveBitmap(mFullPath, theBitmap, format);
         }
 
         return mFullPath;
@@ -111,8 +111,8 @@ public class TinyDB {
      * @param theBitmap the image you want to save as a Bitmap
      * @return true if image was saved, false otherwise
      */
-    public boolean putImageWithFullPath(String fullPath, Bitmap theBitmap) {
-        return !(fullPath == null || theBitmap == null) && saveBitmap(fullPath, theBitmap);
+    public boolean putImageWithFullPath(String fullPath, Bitmap theBitmap, CompressFormat format) {
+        return !(fullPath == null || theBitmap == null) && saveBitmap(fullPath, theBitmap, format);
     }
 
     // Getters
@@ -136,6 +136,8 @@ public class TinyDB {
         return mFolder.getPath() + '/' + imageName;
     }
 
+
+
     /**
      * Saves the Bitmap as a PNG file at path 'fullPath'
      *
@@ -143,7 +145,7 @@ public class TinyDB {
      * @param bitmap   the image as a Bitmap
      * @return true if it successfully saved, false otherwise
      */
-    private boolean saveBitmap(String fullPath, Bitmap bitmap) {
+    private boolean saveBitmap(String fullPath, Bitmap bitmap, CompressFormat format) {
         if (fullPath == null || bitmap == null)
             return false;
 
@@ -167,7 +169,7 @@ public class TinyDB {
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(imageFile);
-            bitmapCompressed = bitmap.compress(CompressFormat.PNG, 100, out);
+            bitmapCompressed = bitmap.compress(format, 100, out);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -406,7 +408,7 @@ public class TinyDB {
      */
     public void putListLong(String key, ArrayList<Long> longList) {
         checkForNullKey(key);
-        Long[] myLongList = longList.toArray(new Long[longList.size()]);
+        Long[] myLongList = longList.toArray(new Long[0]);
         preferences.edit().putString(key, TextUtils.join("‚‗‚", myLongList)).apply();
     }
 

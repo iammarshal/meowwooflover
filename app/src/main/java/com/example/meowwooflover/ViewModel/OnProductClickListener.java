@@ -1,4 +1,7 @@
 package com.example.meowwooflover.ViewModel;
 
-public class ItemSelectedInterface {
+import com.example.meowwooflover.Model.ItemsModel;
+
+public interface OnProductClickListener {
+    void onProductClick(String key);
 }

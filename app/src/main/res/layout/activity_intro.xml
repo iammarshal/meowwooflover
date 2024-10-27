@@ -45,7 +45,7 @@
                 android:id="@+id/startBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign in Now!"
+                android:text="Sign Up Now!"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/orange_bg"
                 android:layout_margin="24dp"

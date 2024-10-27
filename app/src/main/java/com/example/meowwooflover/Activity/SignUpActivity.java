@@ -32,17 +32,14 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance();
 
-        // Initialize views
         emailEditText = findViewById(R.id.editTextSignUpEmail);
         passwordEditText = findViewById(R.id.editTextSignUpPassword);
         confirmPasswordEditText = findViewById(R.id.editTextSignUpConfirmPassword);
         signUpButton = findViewById(R.id.buttonSignUp);
         loginLinkTextView = findViewById(R.id.textViewLoginLink);
 
-        // Set sign up button click listener
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,21 +82,16 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
-        // Create account with Firebase Authentication
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "Sign Up Successful.", Toast.LENGTH_SHORT).show();
-
-                            // Đăng xuất người dùng sau khi đăng ký thành công
                             auth.signOut();
-
-                            // Chuyển hướng đến SignInActivity
                             Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
                             startActivity(intent);
-                            finish(); // Close SignUpActivity
+                            finish();
                         } else {
                             Toast.makeText(SignUpActivity.this, "Sign Up Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -110,6 +102,6 @@ public class SignUpActivity extends AppCompatActivity {
     private void navigateToSignIn() {
         Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
         startActivity(intent);
-        finish(); // Close SignUpActivity
+        finish();
     }
 }

@@ -40,7 +40,6 @@ public class CartActivity extends BaseActivity {
         // Allowing network operations on the main thread (not recommended for production)
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
         // ZaloPay SDK initialization
         ZaloPaySDK.init(2553, Environment.SANDBOX);
 
@@ -48,7 +47,7 @@ public class CartActivity extends BaseActivity {
 
     private void calculateCart() {
         double percentTax = 0.1;
-        double delivery = 15.0;
+        double delivery = 15000;
         tax = Math.round((managmentCart.getTotalFee() * percentTax) * 100) / 100.0;
         double total = Math.round((managmentCart.getTotalFee() + tax + delivery) * 100) / 100;
         double itemTotal = Math.round(managmentCart.getTotalFee() * 100) / 100;
@@ -57,8 +56,7 @@ public class CartActivity extends BaseActivity {
         binding.taxTxt.setText("₫" + tax);
         binding.deliveryTxt.setText("₫" + delivery);
         binding.totalTxt.setText("₫" + total);
-
-        totalString = String.format("%.0f", total);  // Store total as string for later use
+        totalString = String.format("%.0f", total);
     }
 
     private void initCartList() {
@@ -74,7 +72,6 @@ public class CartActivity extends BaseActivity {
                 })
         );
 
-        // On click checkout button
         binding.checkOutBtn.setOnClickListener(v -> {
             CreateOrder orderApi = new CreateOrder();
 

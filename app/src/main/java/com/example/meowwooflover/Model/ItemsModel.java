@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.ArrayList;
 
+
 public class ItemsModel implements Parcelable {
     private String title;
     private String description;
@@ -16,6 +17,7 @@ public class ItemsModel implements Parcelable {
     private int sellerTell;
     private String sellerPic;
 
+    // Default constructor (required for Firebase)
     public ItemsModel() {
         this.title = "";
         this.description = "";
@@ -27,6 +29,20 @@ public class ItemsModel implements Parcelable {
         this.sellerName = "";
         this.sellerTell = 0;
         this.sellerPic = "";
+    }
+
+    public ItemsModel(String title, double price, String description, ArrayList<String> picUrl,
+                      String sellerName, int sellerTell, ArrayList<String> size, String sellerPic) {
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.picUrl = picUrl;
+        this.sellerName = sellerName;
+        this.sellerTell = sellerTell;
+        this.size = size;
+        this.rating = 0.0;
+        this.numberInCart = 0;
+        this.sellerPic = sellerPic;
     }
 
     protected ItemsModel(Parcel in) {

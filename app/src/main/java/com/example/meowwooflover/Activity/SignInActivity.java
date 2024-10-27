@@ -33,19 +33,17 @@ public class SignInActivity extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private Button signInButton;
     private TextView signUpTextView;
-    private LinearLayout googleSignInButton; // Updated type to LinearLayout
+    private LinearLayout googleSignInButton;
     private GoogleSignInClient googleSignInClient;
-    private static final int RC_SIGN_IN = 9001; // Mã yêu cầu cho Google Sign-In
+    private static final int RC_SIGN_IN = 9001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance();
 
-        // Initialize Google Sign-In options
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id)) // Thay bằng ID client của bạn
                 .requestEmail()
@@ -53,14 +51,12 @@ public class SignInActivity extends AppCompatActivity {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        // Initialize views
         emailEditText = findViewById(R.id.editTextEmail);
         passwordEditText = findViewById(R.id.editTextPassword);
         signInButton = findViewById(R.id.buttonSignIn);
         signUpTextView = findViewById(R.id.textViewSignUpLink);
         googleSignInButton = findViewById(R.id.googleBtn);
 
-        // Set sign in button click listener
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +72,6 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
-        // Set Google sign in button click listener
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,23 +89,32 @@ public class SignInActivity extends AppCompatActivity {
             return;
         }
 
-        // Sign in with Firebase Authentication
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(SignInActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
-                            // Navigate to the main activity
-                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish(); // Close the SignInActivity
+                            // Check if the signed-in user is the admin
+                            String currentUserEmail = auth.getCurrentUser().getEmail();
+                            if (currentUserEmail != null && currentUserEmail.equals("admin@meowwooflover.com")) {
+                                Toast.makeText(SignInActivity.this, "Welcome, Admin!", Toast.LENGTH_SHORT).show();
+                                // Navigate to AdminActivity
+                                Intent intent = new Intent(SignInActivity.this, AdminActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(SignInActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
+                                // Navigate to the main activity for regular users
+                                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                            finish();
                         } else {
                             Toast.makeText(SignInActivity.this, "Sign In Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
+
 
     private void goToSignUp() {
         Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
@@ -126,7 +130,6 @@ public class SignInActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
@@ -136,7 +139,6 @@ public class SignInActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            // Đăng nhập vào Firebase bằng Google
             AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
             auth.signInWithCredential(credential)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -144,10 +146,9 @@ public class SignInActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(SignInActivity.this, "Google Sign In Successful", Toast.LENGTH_SHORT).show();
-                                // Navigate to the main activity
                                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                finish(); // Close the SignInActivity
+                                finish();
                             } else {
                                 Toast.makeText(SignInActivity.this, "Google Sign In Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
