@@ -44,7 +44,7 @@
                         android:id="@+id/textView5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tom Johnson"
+                        android:text="Quoc Thien"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
