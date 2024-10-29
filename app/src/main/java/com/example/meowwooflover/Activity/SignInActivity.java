@@ -94,16 +94,13 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Check if the signed-in user is the admin
                             String currentUserEmail = auth.getCurrentUser().getEmail();
                             if (currentUserEmail != null && currentUserEmail.equals("admin@meowwooflover.com")) {
                                 Toast.makeText(SignInActivity.this, "Welcome, Admin!", Toast.LENGTH_SHORT).show();
-                                // Navigate to AdminActivity
                                 Intent intent = new Intent(SignInActivity.this, AdminActivity.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(SignInActivity.this, "Sign In Successful", Toast.LENGTH_SHORT).show();
-                                // Navigate to the main activity for regular users
                                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                                 startActivity(intent);
                             }

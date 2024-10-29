@@ -47,7 +47,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        // Set login link click listener
         loginLinkTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,7 +60,6 @@ public class SignUpActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString().trim();
         String confirmPassword = confirmPasswordEditText.getText().toString().trim();
 
-        // Validate inputs
         if (TextUtils.isEmpty(email)) {
             emailEditText.setError("Email is required.");
             return;
